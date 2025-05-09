@@ -30,7 +30,7 @@ The application is configred  to Esure the Database is created when you run it f
 
  All the  application is on Clean Architecture and is followinr SOLID principles.
 
- Had I had more time, I would have included additional unit tests and implemented caching as well. I aimed to deliver the work as professionally as possible.
+ Had I had more time, I would have included additional unit tests, and also Integration Tests and implemented caching as well. I aimed to deliver the work as professionally as possible.
 
  Rafael C.
 
