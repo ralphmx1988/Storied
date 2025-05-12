@@ -16,7 +16,7 @@ public class PersonController(IMediator mediator) : ControllerBase
     /// </summary>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>A list of all employees.</returns>
-    [HttpGet]
+    [HttpGet("GetAllPersons")]
     public async Task<ActionResult<List<GetAllPeopleQueryResponse>>> GetAll(CancellationToken cancellationToken)
     {
         var response = await mediator.Send(new GetAllPeopleQuery(), cancellationToken);
@@ -30,7 +30,7 @@ public class PersonController(IMediator mediator) : ControllerBase
     /// <param name="request">The request containing employee details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>The response containing the created employee's details.</returns>
-    [HttpPost]
+    [HttpPost("AddPerson")]
     public async Task<ActionResult<AddPersonCommandResponse>> Create([FromBody]AddPersonCommand request,
         CancellationToken cancellationToken)
     {
@@ -45,7 +45,7 @@ public class PersonController(IMediator mediator) : ControllerBase
     /// <param name="id">The ID of the person to retrieve.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>The details of the person.</returns>
-    [HttpGet("{id:guid}")]
+    [HttpGet("GetPersonById/{id:guid}")]
     public async Task<ActionResult<GetPersonByIdQueryResponse>> GetById(Guid id, CancellationToken cancellationToken)
     {
 
@@ -64,18 +64,18 @@ public class PersonController(IMediator mediator) : ControllerBase
     /// <param name="request">The request containing updated person details.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>The updated person's details.</returns>
-    [HttpPut("{id:guid}")]
-    public async Task<ActionResult<UpdatePersonCommandResponse>> Update(Guid id, [FromBody] UpdatePersonCommand request, CancellationToken cancellationToken)
+    [HttpPut("RecordBirth/{id:guid}")]
+    public async Task<ActionResult<RecordBirthCommandResponse>> AddRecordBirth(Guid id, [FromBody] RecordBirthCommand request, CancellationToken cancellationToken)
     {
         if (id != request.Id)
         {
-            return BadRequest("ID in the URL does not match ID in the request body.");
+            return BadRequest("Provided PersonId in the URL does not match PersonId in the request body.");
         }
         var response = await mediator.Send(request, cancellationToken);
         
         if (response == null)
         {
-            return NotFound($"Person with ID {id} was not found to be updated.");
+            return NotFound($"Person with Id {id} was not found to be updated.");
         }
         return Ok(response);
     }

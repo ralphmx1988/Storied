@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Storied.Application.Common.Exceptions;
 using Storied.Application.Features.Person.Queries;
 using Storied.Application.Models;
@@ -19,16 +20,19 @@ public sealed class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQue
 {
     private readonly IPersonRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ILogger<GetPersonByIdQueryHandler> _logger;
 
     /// <summary>  
     /// Initializes a new instance of the <see cref="GetPersonByIdQueryHandler"/> class.  
     /// </summary>  
     /// <param name="repository">The repository to access person data.</param>  
     /// <param name="mapper">The mapper to transform entities to DTOs.</param>  
-    public GetPersonByIdQueryHandler(IPersonRepository repository, IMapper mapper)
+    /// <param name="logger">The logger to log information and errors.</param>  
+    public GetPersonByIdQueryHandler(IPersonRepository repository, IMapper mapper, ILogger<GetPersonByIdQueryHandler> logger)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     /// <summary>  
@@ -40,7 +44,11 @@ public sealed class GetPersonByIdQueryHandler : IRequestHandler<GetPersonByIdQue
     /// <exception cref="NotFoundException">Thrown when a person with the specified ID is not found.</exception>  
     public async Task<GetPersonByIdQueryResponse> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Handling GetPersonByIdQuery for ID: {Id}", request.Id);
+
         var person = await _repository.GetByIdAsync(request.Id, cancellationToken);
+
+        _logger.LogInformation("Person with ID: {Id} retrieved successfully.", request.Id);
         return _mapper.Map<GetPersonByIdQueryResponse>(person);
     }
 }

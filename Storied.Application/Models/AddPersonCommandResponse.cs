@@ -5,6 +5,11 @@ namespace Storied.Application.Models
     public sealed record AddPersonCommandResponse
     {
         /// <summary>  
+        /// Gets or sets the Id of the person.  
+        /// </summary>  
+        public Guid Id { get; set; }
+
+        /// <summary>  
         /// Gets or sets the given name of the person.  
         /// </summary>  
         public required string GivenName { get; set; }

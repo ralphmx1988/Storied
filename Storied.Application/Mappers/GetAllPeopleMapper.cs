@@ -14,6 +14,7 @@ namespace Storied.Application.Mappers
         /// </summary>  
         public GetAllPeopleMapper()
         {
+            AllowNullCollections = false;
             CreateMap<Domain.Entities.Person, GetAllPeopleQueryResponse>();
         }
     }

@@ -5,9 +5,9 @@ using System.Globalization;
 namespace Storied.Application.Validators
 {
     /// <summary>  
-    /// Validator for the <see cref="UpdatePersonCommand"/>.  
+    /// Validator for the <see cref="RecordBirthCommand"/>.  
     /// </summary>  
-    public sealed class UpdatePersonValidator : AbstractValidator<UpdatePersonCommand>
+    public sealed class UpdatePersonValidator : AbstractValidator<RecordBirthCommand>
     {
         /// <summary>  
         /// Initializes a new instance of the <see cref="UpdatePersonValidator"/> class.  

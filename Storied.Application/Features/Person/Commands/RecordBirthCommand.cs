@@ -9,7 +9,7 @@ namespace Storied.Application.Features.Person.Commands;
 /// <summary>  
 /// Command to update a person's details.  
 /// </summary>  
-public sealed record UpdatePersonCommand : IRequest<UpdatePersonCommandResponse>
+public sealed record RecordBirthCommand : IRequest<RecordBirthCommandResponse>
 {
     /// <summary>  
     /// Gets or sets the unique identifier of the person.  

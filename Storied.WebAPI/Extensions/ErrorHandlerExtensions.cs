@@ -34,7 +34,8 @@ public static class ErrorHandlerExtensions
 
                 string[]? errors = contextFeature.Error switch
                 {
-                    BadRequestException => ((BadRequestException)contextFeature.Error.GetBaseException()).Errors
+                    BadRequestException => ((BadRequestException)contextFeature.Error.GetBaseException()).Errors,
+                    _ => throw new ArgumentOutOfRangeException()
                 };
 
                 var errorResponse = new

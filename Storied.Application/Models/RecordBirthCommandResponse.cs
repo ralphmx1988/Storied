@@ -3,7 +3,7 @@ namespace Storied.Application.Models;
 /// <summary>
 /// Represents the response for updating a person's information.
 /// </summary>
-public sealed record UpdatePersonCommandResponse
+public sealed record RecordBirthCommandResponse
 {
     /// <summary>
     /// Gets or sets the unique identifier of the person.
@@ -26,7 +26,7 @@ public sealed record UpdatePersonCommandResponse
     public string? Gender { get; set; }
 
     /// <summary>
-    /// Gets or sets the birth date of the person.
+    /// Gets or sets the birthdate of the person.
     /// </summary>
     public DateTime? BirthDate { get; set; }
 
